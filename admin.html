@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Student Result Management System</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ============ left sidebar ============ -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="brand-icon">🏫</div>
+      <div><b>Meridian</b><small>Academy</small></div>
+    </div>
+
+    <nav class="nav">
+      <button class="active" data-section="overview"    data-title="Overview"><span class="navico">📊</span>Overview</button>
+      <button data-section="students"    data-title="Students"><span class="navico">🎓</span>Students</button>
+      <button data-section="parents"     data-title="Parents"><span class="navico">👨‍👩‍👦</span>Parents</button>
+      <button data-section="courses"     data-title="Courses"><span class="navico">📚</span>Courses</button>
+      <button data-section="semesters"   data-title="Semesters"><span class="navico">🗓️</span>Semesters</button>
+      <button data-section="assignments" data-title="Course &amp; Section Assign"><span class="navico">🔗</span>Course &amp; Section Assign</button>
+      <button data-section="requests"    data-title="Sign-up Requests"><span class="navico">📝</span>Sign-up Requests</button>
+      <button data-section="challenges"  data-title="Result Challenges"><span class="navico">⚠️</span>Result Challenges</button>
+    </nav>
+
+    <div class="profile">
+      <div class="avatar">A</div>
+      <div><b id="userName">Admin</b><small>Admin</small></div>
+      <button class="logout" id="logoutBtn" title="Log out">⏻</button>
+    </div>
+  </aside>
+
+  <!-- ============ right side ============ -->
+  <main class="main">
+
+    <header class="topbar">
+      <button class="hamb" id="menuBtn">☰</button>
+      <div class="title">
+        <h1 id="pageTitle">Overview</h1>
+        <p id="pageSubtitle">System administration</p>
+      </div>
+      <div class="top-actions">
+        <div class="notification-menu">
+          <button class="bell notification-button" id="notificationBtn" type="button" aria-label="Open notifications" aria-expanded="false">
+            &#128276;<span class="notification-count hidden" id="notificationCount">0</span>
+          </button>
+          <div class="notification-panel hidden" id="notificationPanel">
+            <div class="notification-heading"><strong>Notifications</strong><span id="notificationSummary">No new notifications</span></div>
+            <div id="notificationList" class="notification-list"></div>
+          </div>
+        </div>
+        <span class="user-pill">
+          <span class="avatar" style="width:34px;height:34px">A</span>
+          <span id="topName">Admin</span>
+        </span>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- ---------- Overview ---------- -->
+      <section class="page" id="page-overview">
+        <div class="cards">
+          <div class="card metric">
+            <h4>Students</h4><strong id="statStudents">0</strong><p>Enrolled</p>
+            <span class="metric-icon">🎓</span>
+          </div>
+          <div class="card metric">
+            <h4>Teachers</h4><strong id="statTeachers">0</strong><p>Active faculty</p>
+            <span class="metric-icon">👨‍🏫</span>
+          </div>
+          <div class="card metric">
+            <h4>Courses</h4><strong id="statCourses">0</strong><p>Total courses</p>
+            <span class="metric-icon">📚</span>
+          </div>
+          <div class="card metric">
+            <h4>Semesters</h4><strong id="statSemesters">0</strong><p>In the system</p>
+            <span class="metric-icon">🗓️</span>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <section class="card panel">
+            <h2>Published Results by Teacher</h2>
+            <p class="muted">How many results each teacher has published</p>
+            <div class="bar-chart" id="teacherChart"></div>
+            <div class="bar-label" id="teacherChartLabels"></div>
+          </section>
+
+          <section class="card panel">
+            <h2>System Overview</h2>
+            <div class="overview-list">
+              <div class="overview-row"><span>Total grade records</span><strong id="sysTotalGrades">0</strong></div>
+              <div class="overview-row"><span>Published grades</span><strong id="sysPublished" style="color:#0b9f70">0</strong></div>
+              <div class="overview-row"><span>Waiting for publication</span><strong id="sysPending" style="color:#f09a15">0</strong></div>
+              <div class="overview-row"><span>Result challenges</span><strong id="sysChallenges" style="color:#7b3fe4">0</strong></div>
+              <div class="overview-row"><span>Active semester</span><strong id="sysSemester">-</strong></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="card panel" style="margin-top:28px">
+          <div class="toolbar">
+            <div>
+              <h2>Things that need attention</h2>
+              <p class="muted">Pending work in the system right now</p>
+            </div>
+          </div>
+          <div class="course-grid">
+            <div class="course-card"><h3>📝 Sign-up Requests</h3><p id="quickRequests">0 requests waiting for approval.</p></div>
+            <div class="course-card"><h3>⚠️ Result Challenges</h3><p id="quickChallenges">0 challenges submitted.</p></div>
+            <div class="course-card"><h3>🔔 Result notifications</h3><p>Students and linked parents are notified when a result is published.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- Students ---------- -->
+      <section class="page hidden" id="page-students">
+        <div class="section-title">
+          <h2>All Students</h2>
+          <p>Every student with their section, parent and current CGPA.</p>
+        </div>
+
+        <div class="card panel">
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Student</th><th>ID</th><th>Section</th>
+                  <th>Parent</th><th>Phone</th><th>CGPA</th><th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="studentTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- Parents ---------- -->
+      <section class="page hidden" id="page-parents">
+        <div class="section-title">
+          <h2>All Parents</h2>
+          <p>Parent accounts, their linked children, and contact phone numbers.</p>
+        </div>
+
+        <div class="card panel" style="margin-top:24px">
+          <h2>Link Parent to Student</h2>
+          <p class="muted">Choose the parent, student, and their relationship.</p>
+          <div class="form-grid">
+            <div class="field"><label for="linkParent">Parent</label><select id="linkParent"></select></div>
+            <div class="field"><label for="linkStudent">Student</label><select id="linkStudent"></select></div>
+            <div class="field"><label for="linkRelationship">Relationship</label><select id="linkRelationship"><option>Father</option><option>Mother</option><option selected>Guardian</option><option>Other</option></select></div>
+          </div>
+          <div class="action-row"><button class="btn" id="linkParentStudentBtn">Save Link</button></div>
+          <div class="table-wrap" style="margin-top:20px"><table class="table"><thead><tr><th>Parent</th><th>Student</th><th>Relationship</th></tr></thead><tbody id="parentStudentLinkBody"></tbody></table></div>
+        </div>
+      </section>
+
+      <!-- ---------- Courses ---------- -->
+      <section class="page hidden" id="page-courses">
+        <div class="toolbar">
+          <div class="section-title">
+            <h2>Course Management</h2>
+            <p>Add a course and see which teacher is teaching it.</p>
+          </div>
+          <button class="btn" id="openCourseModalBtn">+ Add Course</button>
+        </div>
+
+        <div class="course-grid" id="courseGrid"></div>
+      </section>
+
+      <!-- ---------- Semesters ---------- -->
+      <section class="page hidden" id="page-semesters">
+        <div class="section-title">
+          <h2>Semester Management</h2>
+          <p>Academic terms. Only one semester stays active at a time.</p>
+        </div>
+
+        <div class="card panel">
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr><th>Semester</th><th>Start date</th><th>End date</th><th>Status</th></tr>
+              </thead>
+              <tbody id="semesterTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- Course & section assignment ---------- -->
+      <section class="page hidden" id="page-assignments">
+        <div class="section-title">
+          <h2>Course &amp; Section Assignment</h2>
+          <p>The admin decides which teacher takes which course, and which section a student belongs to.</p>
+        </div>
+
+        <div class="card panel">
+          <div class="notice">
+            Pick a teacher and a course to connect them, then pick a student and the
+            section that student should be moved into.
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="assignTeacher">Teacher</label>
+              <select id="assignTeacher"></select>
+            </div>
+            <div class="field">
+              <label for="assignCourse">Course</label>
+              <select id="assignCourse"></select>
+            </div>
+            <div class="field">
+              <label for="assignStudent">Student</label>
+              <select id="assignStudent"></select>
+            </div>
+            <div class="field">
+              <label for="assignSection">Section</label>
+              <select id="assignSection"></select>
+              <label for="assignSemester">Semester</label>
+              <select id="assignSemester"></select>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="btn" id="saveAssignmentBtn">Save Assignment</button>
+          </div>
+        </div>
+
+        <div class="card panel" style="margin-top:24px">
+          <h2>Current Course Assignments</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr><th>Course</th><th>Code</th><th>Credits</th><th>Teacher</th></tr>
+              </thead>
+              <tbody id="assignmentTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- Sign-up requests ---------- -->
+      <section class="page hidden" id="page-requests">
+        <div class="section-title">
+          <h2>Sign-up Requests</h2>
+          <p>New people cannot create their own account. The admin approves or rejects the request here.</p>
+        </div>
+
+        <div class="card panel">
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th><th>Email</th><th>Role</th>
+                  <th>Section</th><th>Date</th><th>Status</th><th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="requestTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- Result challenges ---------- -->
+      <section class="page hidden" id="page-challenges">
+        <div class="section-title">
+          <h2>Result Challenges</h2>
+          <p>A student or parent can ask for a published result to be checked again. The admin records the decision.</p>
+        </div>
+
+        <div class="card panel">
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Student</th><th>Course</th><th>Reason</th>
+                  <th>Submitted</th><th>Status</th><th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="challengeTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- ============ popup: add a course ============ -->
+<div class="modal-backdrop" id="courseModal">
+  <div class="modal">
+    <button class="close">×</button>
+    <h2>Add Course</h2>
+
+    <div class="field">
+      <label for="courseName">Course name</label>
+      <input id="courseName" type="text" placeholder="Mathematics">
+    </div>
+    <div class="field">
+      <label for="courseCode">Course code</label>
+      <input id="courseCode" type="text" placeholder="MATH 102">
+    </div>
+    <div class="field">
+      <label for="courseCredits">Credits</label>
+      <input id="courseCredits" type="number" value="3" min="1" max="20">
+    </div>
+
+    <div class="action-row">
+      <button class="btn" id="addCourseBtn">Save Course</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ popup: student / parent details ============ -->
+<div class="modal-backdrop" id="detailsModal">
+  <div class="modal">
+    <button class="close">×</button>
+    <h2 id="detailsTitle">Details</h2>
+    <p id="detailsSubtitle" class="muted"></p>
+    <div class="overview-list" id="detailsList"></div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/common.js?v=20261002.1"></script>
+<script src="js/admin.js?v=20261002.2"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Request an Account | Student Result Management System</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="login">
+      <section class="login-brand">
+        <div class="brand-row">
+          <div class="brand-icon">🏫</div>
+          <div>
+            <div class="brand-name">Meridian Academy</div>
+            <div class="brand-sub">Student Result Management</div>
+          </div>
+        </div>
+
+        <h1>Request an <span>Account</span></h1>
+
+        <p>
+          Student, parent, and teacher requests need admin approval. An admin
+          account is created immediately and can log in right away.
+        </p>
+
+        <div class="copyright">project &middot; Meridian Academy</div>
+      </section>
+
+      <section class="login-panel">
+        <div class="login-card">
+          <h2>New account</h2>
+          <p class="subtitle">
+            Your request will be sent to the admin for approval
+          </p>
+
+          <form id="signupForm">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Your full name"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="you@school.edu"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="At least 8 characters"
+                minlength="8"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" type="text" placeholder="+8801XXXXXXXXX" />
+            </div>
+
+            <div class="field">
+              <label for="role">I am a</label>
+              <select id="role">
+                <option>Student</option>
+                <option>Parent</option>
+                <option>Teacher</option>
+                <option>Admin</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="section">Section</label>
+              <select id="section">
+                <option>10-A</option>
+                <option>10-B</option>
+              </select>
+            </div>
+
+            <button class="primary" type="submit">Create Account</button>
+          </form>
+
+          <p class="note" id="formMessage"></p>
+
+          <a href="index.html">
+            <button
+              type="button"
+              class="btn light"
+              style="width: 100%; margin-top: 6px"
+            >
+              ← Back to Login
+            </button>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/signup.js"></script>
+  </body>
+</html>

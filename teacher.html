@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard | Student Result Management System</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="shell">
+
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="brand-icon">🏫</div>
+      <div><b>Meridian</b><small>Academy</small></div>
+    </div>
+
+    <nav class="nav">
+      <button class="active" data-section="overview" data-title="Overview"><span class="navico">📊</span>Overview</button>
+      <button data-section="grades"    data-title="Mark &amp; Grade Entry"><span class="navico">✏️</span>Mark &amp; Grade Entry</button>
+      <button data-section="analytics" data-title="Class Analytics"><span class="navico">📈</span>Class Analytics</button>
+      <button data-section="audit"     data-title="Audit Log"><span class="navico">🔎</span>Audit Log</button>
+    </nav>
+
+    <div class="profile">
+      <div class="avatar">T</div>
+      <div><b id="userName">Teacher</b><small>Teacher</small></div>
+      <button class="logout" id="logoutBtn" title="Log out">⏻</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <button class="hamb" id="menuBtn">☰</button>
+      <div class="title">
+        <h1 id="pageTitle">Overview</h1>
+        <p id="pageSubtitle">Teacher</p>
+      </div>
+      <div class="top-actions">
+        <span class="bell">🔔</span>
+        <span class="user-pill">
+          <span class="avatar" style="width:34px;height:34px">T</span>
+          <span id="topName">Teacher</span>
+        </span>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- ---------- Overview ---------- -->
+      <section class="page" id="page-overview">
+        <div class="cards">
+          <div class="card metric">
+            <h4>My Courses</h4><strong id="statMyCourses">0</strong><p>Assigned to me</p>
+            <span class="metric-icon">📚</span>
+          </div>
+          <div class="card metric">
+            <h4>Students</h4><strong id="statMyStudents">0</strong><p>In my sections</p>
+            <span class="metric-icon">🎓</span>
+          </div>
+          <div class="card metric">
+            <h4>Published</h4><strong id="statPublished">0</strong><p>Results released</p>
+            <span class="metric-icon">✅</span>
+          </div>
+          <div class="card metric">
+            <h4>Drafts</h4><strong id="statDrafts">0</strong><p>Saved but not published</p>
+            <span class="metric-icon">⌛</span>
+          </div>
+        </div>
+
+        <div class="card panel" style="margin-top:28px">
+          <div class="toolbar">
+            <div>
+              <h2>My Courses</h2>
+              <p class="muted">Enter marks and publish results for these courses.</p>
+            </div>
+            <span class="tag green" id="semesterTag">Active semester</span>
+          </div>
+
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Course</th><th>Code</th><th>Credits</th>
+                  <th>Students graded</th><th>Class average</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="courseTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- Mark & grade entry ---------- -->
+      <section class="page hidden" id="page-grades">
+        <div class="section-title">
+          <h2>Mark &amp; Grade Entry</h2>
+          <p>Enter marks and update each student's course attendance. Letter grade and GPA are calculated automatically.</p>
+        </div>
+
+        <div class="card panel">
+          <div class="toolbar">
+            <select id="gradeCourseSelect" class="search" style="max-width:320px"></select>
+            <span class="tag blue" id="gradeSemesterTag">Active semester</span>
+          </div>
+
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Student</th><th>Section</th><th>Mark / 100</th>
+                  <th>Classes held</th><th>Classes present</th>
+                  <th>Grade</th><th>GPA</th><th>Comment</th><th>Status</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="gradeTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- Class analytics ---------- -->
+      <section class="page hidden" id="page-analytics">
+        <div class="section-title">
+          <h2>Class Analytics</h2>
+          <p>Average marks and how the grades are spread across the class.</p>
+        </div>
+
+        <div class="grid2">
+          <div class="card panel">
+            <h2>Class Average</h2>
+            <p class="muted">Average marks in each of my courses</p>
+            <div id="averageList"></div>
+          </div>
+
+          <div class="card panel">
+            <h2>Grade Distribution</h2>
+            <p class="muted">Published results only</p>
+            <div class="chart-bars" id="distributionChart"></div>
+            <div class="dist-labels" id="distributionLabels"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- Audit log ---------- -->
+      <section class="page hidden" id="page-audit">
+        <div class="section-title">
+          <h2>Audit Log</h2>
+          <p>Every mark change is stored with the name of the teacher and the time.</p>
+        </div>
+
+        <div class="card panel">
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr><th>Time</th><th>Teacher</th><th>Action</th><th>Student</th><th>Change</th></tr>
+              </thead>
+              <tbody id="auditTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script src="js/data.js?v=20261003.1"></script>
+<script src="js/common.js"></script>
+<script src="js/teacher.js?v=20261003.1"></script>
+</body>
+</html>

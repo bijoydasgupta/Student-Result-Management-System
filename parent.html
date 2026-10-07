@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parent Dashboard | Student Result Management System</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="shell">
+
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="brand-icon">🏫</div>
+      <div><b>Meridian</b><small>Academy</small></div>
+    </div>
+
+    <nav class="nav">
+      <button class="active" data-section="overview" data-title="Overview"><span class="navico">🏠</span>Overview</button>
+      <button data-section="progress"      data-title="Progress"><span class="navico">📈</span>Progress</button>
+      <button data-section="report"        data-title="Report Card"><span class="navico">📄</span>Report Card</button>
+      <button data-section="notifications" data-title="Notifications"><span class="navico">🔔</span>Notifications</button>
+    </nav>
+
+    <div class="profile">
+      <div class="avatar">P</div>
+      <div><b id="userName">Parent</b><small>Parent</small></div>
+      <button class="logout" id="logoutBtn" title="Log out">⏻</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <button class="hamb" id="menuBtn">☰</button>
+      <div class="title">
+        <h1 id="pageTitle">Overview</h1>
+        <p id="pageSubtitle">Parent</p>
+      </div>
+      <div class="top-actions">
+        <button class="bell" id="notificationBtn" type="button" aria-label="Open notifications">🔔</button>
+        <span class="user-pill">
+          <span class="avatar" style="width:34px;height:34px">P</span>
+          <span id="topName">Parent</span>
+        </span>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- ---------- Overview ---------- -->
+      <section class="page" id="page-overview">
+
+        <div class="card panel" style="margin-bottom:25px;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <h2 style="margin:0" id="headerName">Child name</h2>
+            <p class="muted" style="margin:6px 0 0" id="headerMeta">Student ID · Section</p>
+          </div>
+          <div style="text-align:right">
+            <strong style="font-size:34px;color:#0b9f70" id="headerCgpa">0.00</strong>
+            <div class="muted">CGPA</div>
+          </div>
+        </div>
+
+        <div class="cards">
+          <div class="card metric">
+            <h4>Current GPA</h4><strong id="statGpa">0.00</strong><p id="statGpaTerm">This semester</p>
+            <span class="metric-icon">🎯</span>
+          </div>
+          <div class="card metric">
+            <h4>Courses</h4><strong id="statCourses">0</strong><p>Enrolled</p>
+            <span class="metric-icon">📚</span>
+          </div>
+          <div class="card metric">
+            <h4>Results</h4><strong id="statResults">0</strong><p>Published so far</p>
+            <span class="metric-icon">📋</span>
+          </div>
+          <div class="card metric">
+            <h4>Attendance</h4><strong id="statAttendance">0%</strong><p>All courses</p>
+            <span class="metric-icon">🗓️</span>
+          </div>
+        </div>
+
+        <div class="card panel" style="margin-top:28px">
+          <div class="toolbar">
+            <div>
+              <h2>Published Results</h2>
+              <p class="muted">Marks and the comment written by the teacher.</p>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr><th>Course</th><th>Marks</th><th>Grade</th><th>Teacher comment</th></tr>
+              </thead>
+              <tbody id="resultTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- Progress ---------- -->
+      <section class="page hidden" id="page-progress">
+        <div class="section-title">
+          <h2>Progress</h2>
+          <p>A simple picture of how your child is doing this semester.</p>
+        </div>
+
+        <div class="card panel">
+          <h2>Marks by Course</h2>
+          <p class="muted">Out of 100</p>
+          <div class="bar-chart" id="markChart"></div>
+          <div class="bar-label" id="markChartLabels"></div>
+        </div>
+
+        <div class="card panel" style="margin-top:28px">
+          <h2>Attendance</h2>
+          <p class="muted">Classes attended in each course</p>
+          <div id="attendanceList"></div>
+        </div>
+      </section>
+
+      <!-- ---------- Report card ---------- -->
+      <section class="page hidden" id="page-report">
+        <div class="no-print" style="text-align:right;margin-bottom:15px">
+          <button class="btn" onclick="window.print()">⬇ Print / Save as PDF</button>
+        </div>
+
+        <div class="report">
+          <div class="report-head">
+            <h1>Meridian Academy</h1>
+            <p>Academic Report Card · <span id="reportSemester">-</span></p>
+          </div>
+
+          <div class="report-info">
+            <div><b>Student:</b> <span id="reportName">-</span></div>
+            <div><b>Student ID:</b> <span id="reportId">-</span></div>
+            <div><b>Section:</b> <span id="reportSection">-</span></div>
+            <div><b>Printed on:</b> <span id="reportDate">-</span></div>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr><th>Course</th><th>Marks</th><th>Grade</th><th>GPA</th><th>Teacher comment</th></tr>
+            </thead>
+            <tbody id="reportTableBody"></tbody>
+          </table>
+
+          <div class="report-foot">
+            <span>CGPA: <b id="reportCgpa">0.00</b></span>
+            <span>Courses: <b id="reportCourses">0</b></span>
+            <span>Signature: ____________________</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- Notifications ---------- -->
+      <section class="page hidden" id="page-notifications">
+        <div class="section-title">
+          <h2>Notifications</h2>
+          <p>You receive an in-app alert when a new result is published. Select it to open the result overview.</p>
+        </div>
+
+        <div id="notificationList"></div>
+
+        <div class="card panel" style="margin-top:28px">
+          <h2>SMS History</h2>
+          <p class="muted">SMS delivery records for your account.</p>
+
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr><th>Time</th><th>Phone</th><th>Message</th><th>Status</th></tr>
+              </thead>
+              <tbody id="smsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- ============ popup: challenge a result ============ -->
+<div class="modal-backdrop" id="challengeModal">
+  <div class="modal">
+    <button class="close">×</button>
+    <h2>Challenge a Result</h2>
+    <p class="muted">The admin will check the result again. The grade does not change on its own.</p>
+
+    <div class="field">
+      <label for="challengeCourse">Course</label>
+      <select id="challengeCourse"></select>
+    </div>
+
+    <div class="field">
+      <label for="challengeReason">Reason</label>
+      <textarea id="challengeReason" rows="5" placeholder="Write why the result should be checked again..."></textarea>
+    </div>
+
+    <div class="action-row">
+      <button class="btn orange" id="submitChallengeBtn">Submit Challenge</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/common.js?v=20261002.1"></script>
+<script src="js/parent.js?v=20261002.1"></script>
+</body>
+</html>

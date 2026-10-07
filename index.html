@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Student Result Management System</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="login">
+      <!-- left side: just information about the project -->
+      <section class="login-brand">
+        <div class="brand-row">
+          <div class="brand-icon">🏫</div>
+          <div>
+            <div class="brand-name">Meridian Academy</div>
+            <div class="brand-sub">Student Result Management System</div>
+          </div>
+        </div>
+
+        <h1>Academic <span>Results</span><br />Management</h1>
+
+        <p>
+          One place for teachers, students, parents and the admin office to keep
+          academic results organised. Teachers enter the marks, the system works
+          out the grade and GPA, and parents get an SMS as soon as a result is
+          published.
+        </p>
+
+        <div class="stats">
+          <div class="stat-box">
+            <strong>HTML, CSS</strong><small>JavaScript, PHP &amp; MySQL</small>
+          </div>
+          <div class="stat-box">
+            <strong>GPA & CGPA</strong><small>Calculated automatically</small>
+          </div>
+          <div class="stat-box">
+            <strong>Result</strong><small>Overview</small>
+          </div>
+          <div class="stat-box">
+            <strong>4</strong><small>Dashboards</small>
+          </div>
+        </div>
+
+        <div class="copyright">project &middot; Meridian Academy</div>
+      </section>
+
+      <!-- right side: the actual login form -->
+      <section class="login-panel">
+        <div class="login-card">
+          <h2>Welcome back</h2>
+          <p class="subtitle">Sign in to open your dashboard</p>
+
+          <!-- these four buttons only fill in the demo email + password -->
+          <div class="demo-grid">
+            <button type="button" class="demo" data-email="admin@school.edu">
+              <span class="ico">⚙️</span>
+              <span><b>Admin</b><small>Runs the whole system</small></span>
+            </button>
+            <button type="button" class="demo" data-email="teacher@school.edu">
+              <span class="ico">👨‍🏫</span>
+              <span><b>Teacher</b><small>Enters marks and grades</small></span>
+            </button>
+            <button type="button" class="demo" data-email="student@school.edu">
+              <span class="ico">🎓</span>
+              <span><b>Student</b><small>Sees own results</small></span>
+            </button>
+            <button type="button" class="demo" data-email="parent@school.edu">
+              <span class="ico">👨‍👩‍👦</span>
+              <span><b>Parent</b><small>Follows child progress</small></span>
+            </button>
+          </div>
+
+          <form id="loginForm">
+            <div class="field">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="you@school.edu"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="Your password"
+                required
+              />
+            </div>
+
+            <button class="primary" type="submit">Sign In →</button>
+          </form>
+
+          <p class="note">
+            Click a role above to fill the demo login. All demo accounts use the
+            password demo123. Besides, you can take input for separate roles.
+          </p>
+
+          <a href="signup.html">
+            <button
+              type="button"
+              class="btn light"
+              style="width: 100%; margin-top: 10px"
+            >
+              Request an Account →
+            </button>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/login.js"></script>
+  </body>
+</html>

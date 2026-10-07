@@ -1,0 +1,72 @@
+STUDENT RESULT MANAGEMENT SYSTEM - FILE LIST
+============================================
+
+Made with HTML, CSS, JavaScript, PHP & MySQL.
+
+student_result_management_system/
+|
++-- index.html               login page
++-- signup.html              request a new account
++-- admin.html               admin dashboard
++-- teacher.html             teacher dashboard
++-- student.html             student dashboard
++-- parent.html              parent dashboard
+|
++-- css/
+|   +-- style.css            all styling for every page
+|
++-- js/
+|   +-- data.js              the records and every save/read action
+|   +-- common.js            session, sidebar menu, popups, helpers
+|   +-- login.js             login form
+|   +-- signup.js            account request form
+|   +-- admin.js             admin dashboard
+|   +-- teacher.js           teacher dashboard
+|   +-- student.js           student dashboard
+|   +-- parent.js            parent dashboard
+|
++-- README.md                how to run it and how it works
++-- PROJECT_STRUCTURE.txt    this file
+
+
+HOW TO RUN
+----------
+Open index.html in a browser. Nothing to install.
+
+
+TECHNOLOGY USED
+---------------
+HTML5      - the six pages and all the layout
+CSS3       - one stylesheet, flexbox and grid, responsive, print style
+JavaScript - all the logic, DOM updates and the data handling
+localStorage - keeps the records and the login between pages
+
+
+HOW THE FILES WORK TOGETHER
+---------------------------
+   index.html
+        |  db.login(email, password)
+        v
+   js/data.js  <---- seedData + localStorage
+        |
+        |  the logged in user is saved by js/common.js
+        v
+   admin.html / teacher.html / student.html / parent.html
+        |  db.getState(user)  ->  only the data for that role
+        v
+   js/admin.js, teacher.js, student.js, parent.js
+        put the rows, numbers and chart bars into the HTML
+
+Every HTML page loads the files in this order:
+
+   css/style.css  ->  js/data.js  ->  js/common.js  ->  its own js file
+
+
+WHERE THE DATA IS KEPT
+----------------------
+localStorage key "srms_data"  - all the records
+localStorage key "srms_user"  - who is logged in right now
+
+The first time the project is opened, the starting records inside
+js/data.js are copied into localStorage. The admin dashboard has a
+"Reset demo data" button to bring those starting records back.
